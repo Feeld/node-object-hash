@@ -88,6 +88,7 @@ function makeObjectSorter(options) {
   options = options || {};
   var coerce = typeof options.coerce === 'undefined' ? true : options.coerce;
   var sort = typeof options.sort === 'undefined' ? true : options.sort;
+  var sortArrays = typeof options.sortArrays === 'undefined' ? true : options.sortArrays;
   var stringifier = {};
 
   stringifier.string = function sortString(obj) {
@@ -147,7 +148,7 @@ function makeObjectSorter(options) {
       result.push(stringifier[itemType](item));
     }
 
-    return sort ? '[' + result.sort().toString() + ']' : '[' + result.toString() + ']';
+    return ( sort && sortArrays ) ? '[' + result.sort().toString() + ']' : '[' + result.toString() + ']';
   };
 
   stringifier.set = function sortSet(obj) {
